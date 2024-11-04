@@ -16,8 +16,6 @@ function nextPage(page) {
     currentPage++;
     if (currentPage < pages.length) {
         pages[currentPage].style.display = 'block';
-    } else {
-        calculatePayment();
     }
 }
 
@@ -78,28 +76,14 @@ function calculatePayment() {
 
         document.getElementById('approved-amount').textContent = approvedAmount.toFixed(2);
         document.getElementById('monthly-payment').textContent = monthlyPayment.toFixed(2);
+        
+        // Directly show the results page
+        document.querySelectorAll('.form-page')[currentPage].style.display = 'none'; // Hide the current page
+        document.getElementById('result-page').style.display = 'block'; // Show the results page
     } else {
         alert('Your application has been declined based on the provided criteria.');
         return;
     }
-
-    // Show the loading page
-    const loadingPage = document.getElementById('loading-page');
-    loadingPage.style.display = 'block';
-    
-    // Hide all other pages
-    const pages = document.querySelectorAll('.form-page');
-    for (let page of pages) {
-        if (page !== loadingPage) {
-            page.style.display = 'none';
-        }
-    }
-
-    // Move to the result page after 5 seconds
-    setTimeout(() => {
-        loadingPage.style.display = 'none';
-        document.getElementById('result-page').style.display = 'block';
-    }, 5000); // 5000 milliseconds = 5 seconds
 }
 
 // Format currency for input fields
