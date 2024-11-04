@@ -1,5 +1,11 @@
 let currentPage = 0;
 
+function startApplication() {
+    document.getElementById('start-button').style.display = 'none'; // Hide the start button
+    document.getElementById('loan-form').style.display = 'block'; // Show the form
+    document.getElementById('page-1').style.display = 'block'; // Show the first page
+}
+
 function nextPage(page) {
     const pages = document.querySelectorAll('.form-page');
     pages[currentPage].style.display = 'none';
