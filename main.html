@@ -11,7 +11,10 @@
 
 <body>
     <div class="container">
-        <form id="loan-form">
+        <!-- Start Application Button -->
+        <button id="start-button" onclick="startApplication()">Start Application</button>
+        
+        <form id="loan-form" style="display:none;">
             <!-- Page 1 -->
             <div class="form-page" id="page-1">
                 <h2>Loan Information</h2>
@@ -112,7 +115,6 @@
             <!-- Page 5 (Loading Screen) -->
             <div class="form-page" id="loading-page" style="display:none;">
                 <h2>Calculating Monthly Payment...</h2>
-                <button type="button" onclick="nextPage(6)">Next</button>
             </div>
 
             <!-- Page 6 (Results) -->
