@@ -37,7 +37,7 @@ function calculatePayment() {
     let interestRate = 0;
     
     // Implement your criteria logic here based on the criteria provided in the prompt
-    // This is just a placeholder for the interested rate logic.
+    // This is just a placeholder for the interest rate logic.
     if (loanAmount <= 10000) {
         if (creditScore < 640 || dti > 45) approvedAmount = 0;
         else {
@@ -70,14 +70,26 @@ function calculatePayment() {
         document.getElementById('monthly-payment').textContent = monthlyPayment.toFixed(2);
     } else {
         alert('Your application has been declined based on the provided criteria.');
+        return;
     }
 
     // Show the loading page
-    document.getElementById('loading-page').style.display = 'block';
+    const loadingPage = document.getElementById('loading-page');
+    loadingPage.style.display = 'block';
+    
+    // Hide all other pages
+    const pages = document.querySelectorAll('.form-page');
+    for (let page of pages) {
+        if (page !== loadingPage) {
+            page.style.display = 'none';
+        }
+    }
+
+    // Move to the result page after 5 seconds
     setTimeout(() => {
-        document.getElementById('loading-page').style.display = 'none';
+        loadingPage.style.display = 'none';
         document.getElementById('result-page').style.display = 'block';
-    }, 2000);
+    }, 5000); // 5000 milliseconds = 5 seconds
 }
 
 // Format currency for input fields
