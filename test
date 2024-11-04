@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <form id="loan-form">
+            <!-- Page 1 -->
+            <div class="form-page" id="page-1">
+                <h2>Loan Information</h2>
+                <label for="loan-amount">Loan Amount ($):</label>
+                <input type="text" id="loan-amount" name="loan-amount" required placeholder="$0.00" oninput="formatCurrency(this)">
+                
+                <label for="loan-purpose">Loan Purpose:</label>
+                <select id="loan-purpose" name="loan-purpose" required>
+                    <option value="" disabled selected>Select Purpose</option>
+                    <option value="Working Capital">Working Capital</option>
+                    <option value="Equipment Purchase">Equipment Purchase</option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Other">Other</option>
+                </select>
+                
+                <button type="button" onclick="nextPage(1)">Next</button>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="form-page" id="page-2" style="display:none;">
+                <h2>Financial Information</h2>
+                <label for="credit-score">Estimated Credit Score:</label>
+                <input type="number" id="credit-score" name="credit-score" min="300" max="850" required>
+
+                <label for="monthly-income">Estimated Monthly Income ($):</label>
+                <input type="text" id="monthly-income" name="monthly-income" required placeholder="$0.00" oninput="formatCurrency(this)">
+
+                <label for="monthly-debt">Estimated Monthly Debt ($):</label>
+                <input type="text" id="monthly-debt" name="monthly-debt" required placeholder="$0.00" oninput="formatCurrency(this)">
+
+                <button type="button" onclick="nextPage(2)">Next</button>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="form-page" id="page-3" style="display:none;">
+                <h2>Business Information</h2>
+                <label for="business-established">Business Established:</label>
+                <select id="business-established" name="business-established" onchange="toggleTimeInBusiness()" required>
+                    <option value="" disabled selected>Select Option</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+
+                <div id="time-in-business-container" style="display:none;">
+                    <label for="time-in-business">Time in Business (Years):</label>
+                    <input type="number" id="time-in-business" name="time-in-business" min="0">
+                </div>
+
+                <label for="expertise">Area of Expertise:</label>
+                <select id="expertise" name="expertise" onchange="toggleOtherExpertise()" required>
+                    <option value="" disabled selected>Select Expertise</option>
+                    <option value="Acupuncturist">Acupuncturist</option>
+                    <option value="Advanced Practising RN">Advanced Practising RN</option>
+                    <option value="Other">Other</option>
+                    <option value="Veterinarian">Veterinarian</option>
+                    <option value="Dentist">Dentist</option>
+                    <!-- Add other options here -->
+                </select>
+
+                <div id="other-expertise-container" style="display:none;">
+                    <label for="other-expertise">Please specify:</label>
+                    <input type="text" id="other-expertise" name="other-expertise">
+                </div>
+
+                <button type="button" onclick="nextPage(3)">Next</button>
+            </div>
+
+            <!-- Page 4 -->
+            <div class="form-page" id="page-4" style="display:none;">
+                <h2>Personal Information</h2>
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" name="first-name" required>
+
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" name="last-name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="address">Street Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" name="zip" required pattern="\d{5}">
+
+                <button type="button" onclick="nextPage(4)">Next</button>
+            </div>
+
+            <!-- Page 5 (Loading Screen) -->
+            <div class="form-page" id="loading-page" style="display:none;">
+                <h2>Calculating Monthly Payment...</h2>
+            </div>
+
+            <!-- Page 6 (Results) -->
+            <div class="form-page" id="result-page" style="display:none;">
+                <h2>Monthly Payment Estimate</h2>
+                <p>Your estimated approved loan amount: $<span id="approved-amount">0.00</span></p>
+                <p>Your estimated monthly payment: $<span id="monthly-payment">0.00</span></p>
+                
+                <label for="term-slider">Loan Term (Years): <span id="term-display">15</span></label>
+                <input type="range" id="term-slider" min="5" max="30" value="15" step="1" oninput="updatePayment()">
+                
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
