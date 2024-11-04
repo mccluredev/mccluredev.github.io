@@ -109,16 +109,10 @@
                 <label for="zip">Zip Code:</label>
                 <input type="text" id="zip" name="zip" required pattern="\d{5}">
 
-                <button type="button" onclick="nextPage(4)">Next</button>
+                <button type="button" onclick="calculatePayment()">Next</button>
             </div>
 
-            <!-- Page 5 (Loading Screen) -->
-            <div class="form-page" id="loading-page" style="display:none;">
-                <h2>Calculating Monthly Payment...</h2>
-                <button type="button" onclick="nextPage(5)">Next</button>
-            </div>
-
-            <!-- Page 6 (Results) -->
+            <!-- Page 5 (Results) -->
             <div class="form-page" id="result-page" style="display:none;">
                 <h2>Monthly Payment Estimate</h2>
                 <p>Your estimated approved loan amount: $<span id="approved-amount">0.00</span></p>
